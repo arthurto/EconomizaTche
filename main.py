@@ -20,7 +20,6 @@ def parsing():
     return parser.parse_args()
 
 def get_chaves(args):
-    # pi pi pi pi pi pi 
     tabela = pd.read_csv(args.filename)
     return tabela["Chave de Acesso"]
 
@@ -32,7 +31,7 @@ def main():
     chaves = get_chaves(args)
 
     df = pd.DataFrame(default_datable) # Criando um data frame vazio
-    
+
     for chave in chaves:
         # faz o request
         request = requests.post(url,data=payload(chave),headers=headers)
