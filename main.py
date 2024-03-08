@@ -6,7 +6,7 @@ from nota_fiscal import *
 import argparse
 from os import getcwd
 
-def main():
+def parsing():
     # Parssando os argumentos, tchê!
     parser = argparse.ArgumentParser(
         prog="Economiza, Tchê!",
@@ -17,13 +17,22 @@ def main():
     parser.add_argument(
         '--filename',help="path to file",
         default=f"{getcwd()}/Nota Fiscal Gaúcha.csv")
-    args = parser.parse_args()
+    return parser.parse_args()
 
-    # Lendo a tabela, tchê!
+def get_chaves(args):
+    # pi pi pi pi pi pi 
     tabela = pd.read_csv(args.filename)
-    chaves = tabela["Chave de Acesso"]
-    df = pd.DataFrame(default_datable) # Criando um data frame 
+    return tabela["Chave de Acesso"]
 
+
+def main():
+
+    args = parsing()
+    
+    chaves = get_chaves(args)
+
+    df = pd.DataFrame(default_datable) # Criando um data frame vazio
+    
     for chave in chaves:
         # faz o request
         request = requests.post(url,data=payload(chave),headers=headers)
