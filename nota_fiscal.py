@@ -8,23 +8,21 @@ headers = {
 
 default_datable = {
                         'NOTA':[],
-                        'LOJA':[],
+                        'LOJA_NOME':[],
+                        'LOJA_CNPJ':[],
+                        'LOJA_INSC_EST':[],
                         'ENDERECO':[],
                         'TOTAL':[],
+                        'TOTAL_DESC':[],
+                        'TOTAL_PAGO':[],
+                        'TOTAL_PAGAMENTO':[],
                         'NFe':[],
+                        'NFe_SERIE':[],
+                        'NFe_DATA':[],
                         'CONSUMIDOR':[],
-                        'PRODUTOS':[],
+                        # 'PRODUTOS':[],
                     }
 
-default_datable = {
-                        'NOTA':[],
-                        'LOJA':[],
-                        'ENDERECO':[],
-                        'TOTAL':[],
-                        'NFe':[],
-                        'CONSUMIDOR':[],
-                        'PRODUTOS':[],
-                    }
 
 error_msg = "Documento Fiscal (NFC-e) inexistente na base de dados da SEFAZ"
 

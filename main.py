@@ -44,15 +44,7 @@ def main():
             if error_msg in request.text: 
                 # Já tentou duas vezes, agora desiste.
                  
-                df = pd.concat([df,pd.DataFrame({
-                                    'NOTA':[None],
-                                    'LOJA':[None],
-                                    'ENDERECO':[None],
-                                    'TOTAL':[None],
-                                    'NFe':[None],
-                                    'CONSUMIDOR':[None],
-                                    'PRODUTOS':[None]
-                                })])
+                df = pd.concat([df,pd.DataFrame(default_datable)])
                 print(f"NFe CHAVE {chave} FALHOU!")
                 continue
         print(f"NFe CHAVE {chave} foi obtida!")
@@ -97,6 +89,7 @@ def main():
                 }
                 for produto in produtos
         ]
+        pd.DataFrame(produtos).to_csv(f'produtos_{chave}_.csv')
 
         total = extract_table(table_nfce[10])
         total = {
@@ -108,12 +101,19 @@ def main():
 
         df = pd.concat([df,pd.DataFrame({
                             'NOTA':[chave],
-                            'LOJA':[loja],
+                            'LOJA_NOME':[loja['nome']],
+                            'LOJA_CNPJ':[loja['cnpj']],
+                            'LOJA_INSC_EST':[loja['inscricao_estadual']],
                             'ENDERECO':[endereco],
-                            'TOTAL':[total],
-                            'NFe':[meta_data],
+                            'TOTAL':[total["valor_total"]],
+                            'TOTAL_DESC':[total["desconto"]],
+                            'TOTAL_PAGO':[total["valor_pago"]],
+                            'TOTAL_PAGAMENTO':[total["forma_pagamento"]],
+                            'NFe':[meta_data["nfe"]],
+                            'NFe_SERIE':[meta_data["serie"]],
+                            'NFe_DATA':[meta_data["datetime"]],
                             'CONSUMIDOR':[consumidor],
-                            'PRODUTOS':[produtos]
+                            # 'PRODUTOS':[produtos]
                         })])
     df.to_csv("data.csv")
 
